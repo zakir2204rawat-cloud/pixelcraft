@@ -1,0 +1,700 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* =========================================
+   THEMES  (day = default, night = [data-theme="dark"])
+   ========================================= */
+
+:root {
+    --primary: #4f6bff;
+    --primary-2: #8a5cff;
+    --primary-soft: rgba(79, 107, 255, .12);
+    --primary-border: rgba(79, 107, 255, .35);
+
+    --bg: #f3f5fb;
+    --bg-glow-1: rgba(79, 107, 255, .18);
+    --bg-glow-2: rgba(138, 92, 255, .14);
+    --surface: #ffffff;
+    --surface-2: #f1f4fb;
+    --nav: rgba(255, 255, 255, .72);
+    --text: #141a2e;
+    --muted: #6b7694;
+    --border: #e3e8f3;
+    --canvas-bg: #e8ecf6;
+    --canvas-border: #cfd7ea;
+    --shadow: 0 10px 40px rgba(30, 50, 110, .08);
+    --shadow-btn: 0 8px 20px rgba(79, 107, 255, .35);
+
+    --ok-bg: rgba(34, 197, 94, .14);
+    --ok-text: #15803d;
+    --danger-bg: rgba(239, 68, 68, .10);
+    --danger-text: #dc2626;
+
+    --radius: 18px;
+    color-scheme: light;
+}
+
+[data-theme="dark"] {
+    --primary: #7c93ff;
+    --primary-2: #a78bfa;
+    --primary-soft: rgba(124, 147, 255, .16);
+    --primary-border: rgba(124, 147, 255, .45);
+
+    --bg: #0b1020;
+    --bg-glow-1: rgba(79, 107, 255, .22);
+    --bg-glow-2: rgba(167, 139, 250, .16);
+    --surface: #131a2e;
+    --surface-2: #1a2340;
+    --nav: rgba(11, 16, 32, .72);
+    --text: #eef1fb;
+    --muted: #94a0c2;
+    --border: #232d4d;
+    --canvas-bg: #0e1427;
+    --canvas-border: #2c3760;
+    --shadow: 0 10px 40px rgba(0, 0, 0, .45);
+    --shadow-btn: 0 8px 22px rgba(124, 147, 255, .28);
+
+    --ok-bg: rgba(34, 197, 94, .16);
+    --ok-text: #4ade80;
+    --danger-bg: rgba(248, 113, 113, .14);
+    --danger-text: #f87171;
+
+    color-scheme: dark;
+}
+
+/* =========================================
+   BASE
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(800px 400px at 12% -5%, var(--bg-glow-1), transparent 60%),
+        radial-gradient(700px 400px at 95% 0%, var(--bg-glow-2), transparent 60%),
+        var(--bg);
+    background-attachment: fixed;
+    min-height: 100vh;
+    transition: background-color .3s ease, color .3s ease;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--primary-border);
+    outline-offset: 2px;
+}
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--nav);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 14px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -.3px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.tagline {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+/* Night / day toggle */
+
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    font-size: 18px;
+    line-height: 1;
+    box-shadow: var(--shadow);
+    transition: transform .2s ease, border-color .2s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px) rotate(-8deg);
+    border-color: var(--primary-border);
+}
+
+.theme-toggle:active {
+    transform: scale(.94);
+}
+
+.icon-sun { display: none; }
+[data-theme="dark"] .icon-sun { display: inline; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+/* =========================================
+   MAIN
+   ========================================= */
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 48px auto;
+}
+
+/* Introduction */
+
+.intro {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.tag {
+    display: inline-block;
+    background: var(--primary-soft);
+    color: var(--primary);
+    border: 1px solid var(--primary-border);
+    padding: 7px 16px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.intro h1 {
+    font-size: clamp(30px, 5.5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin: 18px 0 12px;
+}
+
+.intro p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* =========================================
+   STUDIO
+   ========================================= */
+
+.studio {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    transition: background-color .3s ease, border-color .3s ease;
+}
+
+/* Toolbar */
+
+.toolbar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+}
+
+.tool-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+}
+
+.tool-group label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.tool-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tool {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 9px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all .2s ease;
+}
+
+.tool:hover {
+    border-color: var(--primary-border);
+    transform: translateY(-1px);
+}
+
+.tool.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    color: #fff;
+    border-color: transparent;
+    box-shadow: var(--shadow-btn);
+}
+
+#colorPicker {
+    width: 100%;
+    height: 42px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 3px;
+    cursor: pointer;
+}
+
+#brushSize {
+    width: 100%;
+    accent-color: var(--primary);
+}
+
+#sizeValue {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.swatch {
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform .15s ease;
+}
+
+.swatch:hover {
+    transform: scale(1.18);
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Canvas heading */
+
+.canvas-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 28px 0 16px;
+    gap: 12px;
+}
+
+.canvas-heading h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.canvas-heading p {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ok-bg);
+    color: var(--ok-text);
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* Drawing canvas */
+
+.canvas-wrapper {
+    width: 100%;
+    overflow: auto;
+    background-color: var(--canvas-bg);
+    border: 2px dashed var(--canvas-border);
+    border-radius: var(--radius);
+    padding: 12px;
+    transition: background-color .3s ease, border-color .3s ease;
+}
+
+/* The drawing surface stays white in both modes so colours look true
+   and the eraser (which paints white) always matches. */
+#drawingCanvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .18);
+    cursor: crosshair;
+    touch-action: none;
+}
+
+/* Action buttons */
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.actions button {
+    border: 1px solid transparent;
+    border-radius: 14px;
+    padding: 13px 22px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.actions button:hover {
+    transform: translateY(-2px);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    color: #fff;
+    box-shadow: var(--shadow-btn);
+    margin-left: auto;
+}
+
+.secondary-btn {
+    background: var(--primary-soft);
+    color: var(--primary);
+    border-color: var(--primary-border) !important;
+}
+
+.danger-btn {
+    background: var(--danger-bg);
+    color: var(--danger-text);
+}
+
+/* Tips */
+
+.tips {
+    background: linear-gradient(135deg, var(--primary-soft), transparent), var(--surface);
+    border: 1px solid var(--border);
+    padding: 26px;
+    border-radius: 20px;
+    margin-top: 28px;
+}
+
+.tips h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.tips p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 28px;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 650px) {
+
+    .container {
+        margin: 28px auto;
+    }
+
+    .navbar {
+        padding: 12px 5%;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .tagline {
+        display: none;
+    }
+
+    .studio {
+        padding: 16px;
+        border-radius: 20px;
+    }
+
+    .toolbar {
+        gap: 12px;
+    }
+
+    .canvas-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .actions button {
+        width: 100%;
+    }
+
+    .primary-btn {
+        margin-left: 0;
+    }
+
+    .canvas-wrapper {
+        padding: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* =========================================
+   MORE TOOLS, COLOUR WHEEL & EXTRAS
+   ========================================= */
+
+.tool-group.wide {
+    grid-column: span 2;
+}
+
+.tool-buttons.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 8px;
+}
+
+.tool-buttons.grid .tool {
+    text-align: left;
+    white-space: nowrap;
+}
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: var(--text) !important;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.toggle-row input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+}
+
+/* Brush preview */
+
+.brush-preview {
+    height: 76px;
+    display: grid;
+    place-items: center;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+#brushDot {
+    display: block;
+    border-radius: 50%;
+    background: var(--primary);
+}
+
+/* Colour wheel */
+
+.wheel-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+#colorWheel {
+    width: 220px;
+    height: 220px;
+    max-width: 100%;
+    flex: none;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.wheel-controls {
+    flex: 1;
+    min-width: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wheel-controls input[type="range"] {
+    width: 100%;
+    accent-color: var(--primary);
+}
+
+.hex-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-preview {
+    width: 46px;
+    height: 46px;
+    flex: none;
+    border-radius: 14px;
+    border: 2px solid var(--border);
+    background: #4f6bff;
+}
+
+#hexInput {
+    flex: 1;
+    min-width: 0;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#hexInput:focus {
+    border-color: var(--primary);
+}
+
+.mini-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 11px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: var(--shadow-btn);
+    transition: transform .2s ease;
+}
+
+.mini-btn:hover {
+    transform: translateY(-2px);
+}
+
+.mini-btn.subtle {
+    align-self: flex-start;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    box-shadow: none;
+    padding: 7px 12px;
+    font-weight: 600;
+}
+
+.my-colours {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 30px;
+    align-items: center;
+}
+
+.empty-note {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.swatch.selected {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Redo button sits with the other secondary buttons */
+
+@media (max-width: 650px) {
+    .tool-group.wide {
+        grid-column: span 1;
+    }
+
+    #colorWheel {
+        margin: 0 auto;
+    }
+}
